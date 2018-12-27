@@ -1,5 +1,7 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const passport=require('passport');
+const bodyparser=require('body-parser');
 
 const users=require('./routes/api/users')
 const posts=require('./routes/api/posts')
@@ -12,8 +14,13 @@ mongoose.connect(db,{useNewUrlParser:true})
 		.catch(err=>console.log(err))
 
 
+app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.json());
+app.use(passport.initialize());
 
-app.get("/",(req,res)=>res.send("hello"))
+require('./config/passport')(passport);
+
+
 
 
 //use routes
