@@ -1,0 +1,22 @@
+.nav {
+	display:block;
+	background-color:rgba(240,240,245,0.5);
+	font-size: 22px;
+	font-weight: lighter;
+	padding:10px 30px;
+	position: relative;
+	width: 100%;
+	z-index: 100;
+}
+
+
+.ul {
+	float: right;
+	
+}
+
+.li {
+	display: inline-block;
+	margin:0 15px;
+	list-style: none;
+}

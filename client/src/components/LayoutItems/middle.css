@@ -1,0 +1,17 @@
+.image {
+	background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../../showcase.png");
+	background-size: cover;
+	background-position: center;
+	height:100vh;
+	margin-bottom: -50px;
+	color:black;
+	
+}
+
+.text {
+	font-size: 25px;
+	font-weight: 350;
+	padding:50vh;
+	text-align:center;
+
+}
