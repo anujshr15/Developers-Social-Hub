@@ -3,6 +3,7 @@ const mongoose=require('mongoose');
 const passport=require('passport');
 const bodyparser=require('body-parser');
 
+const cors=require('cors');
 const users=require('./routes/api/users')
 const posts=require('./routes/api/posts')
 const profile=require('./routes/api/profile')
@@ -24,6 +25,7 @@ require('./config/passport')(passport);
 
 
 //use routes
+app.use(cors())
 
 app.use('/api/users',users)
 app.use('/api/profile',profile)
@@ -32,6 +34,6 @@ app.use('/api/posts',posts)
 
 
 
-const port=process.env.PORT || 3000;
+const port=process.env.PORT || 3001;
 
 app.listen(port,()=>console.log(`server running on port ${port}`));

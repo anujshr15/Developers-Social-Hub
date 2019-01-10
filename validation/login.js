@@ -7,37 +7,36 @@ const isEmpty=(val)=>{
 			||(typeof val==="string" && val.trim().length===0))
 }
 
-
-
-module.exports=function checkValidation(data){
+module.exports=function checkLoginValidation(data){
 	let errors={};
 	let isValid=true;
 	 data.email=isEmpty(data.email)?"":data.email;
 	 data.password=isEmpty(data.password)?"":data.password;
 
+	 if(!Validate.isEmail(data.email))
+	{
+		errors.email="Invalid email"
+		
+	}
 
 	if(Validate.isEmpty(data.email))
 	{
-		errors.email="Email field cannot be empty";
-		isValid=false
+		errors.email="Email field cannot be empty"
+		
 	}
 
-	if(!Validate.isEmail(data.email))
-	{
-		errors.email="Invalid email"
-		isValid=false;
-	}
+	
 
 	if(Validate.isEmpty(data.password))
 	{
 		errors.password="password field cannot be empty"
-		isValid=false;
+		
 	}
 
 
 	return {
 		errors,
-		isValid
+		isValid:isEmpty(errors)
 	}
 
 

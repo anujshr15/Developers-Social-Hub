@@ -14,50 +14,52 @@ module.exports=function checkValidation(data){
 	let isValid=true;
 	 data.name=isEmpty(data.name)?"":data.name;
 	 data.email=isEmpty(data.email)?"":data.email;
-	 data.password=isEmpty(data.password)?"":data.password;
+	 data.password1=isEmpty(data.password1)?"":data.password1;
 	 data.password2=isEmpty(data.password2)?"":data.password2;
 
 
 	if(!Validate.isLength(data.name,{min:2,max:20}))
 	{
-		errors.name="Name must be between 2 and 20 characters";
-		isValid=false;
+		errors.name="Name must be between 2 and 20 characters"
+		
 	}
 
 	if(Validate.isEmpty(data.name))
 	{
-		errors.name="name field cannot be empty",
-		isValid=false;
+		errors.name="name field cannot be empty"
+		
 	}
 
 	if(!Validate.isEmail(data.email))
 	{
-		errors.email="Invalid email",
-		isValid=false;
+		errors.email="Invalid email"
+		
 	}
 
-	if(Validate.isEmpty(data.password))
+	if(!Validate.isLength(data.password1,{min:6,max:20}))
 	{
-		errors.password="password field cannot be empty",
-		isValid=false;
+		errors.password1="password must be between 6 and 20 characters"
+		
 	}
 
-	if(!Validate.isLength(data.password,{min:6,max:20}))
+	if(Validate.isEmpty(data.password1))
 	{
-		errors.password="password must be between 6 and 20 characters",
-		isValid=false;
+		errors.password1="password field cannot be empty"
+		
 	}
 
+	
 
-	if(!Validate.equals(data.password,data.password2))
+
+	if(!Validate.equals(data.password1,data.password2))
 	{
-		errors.password2="confirm password must match with password",
-		isValid=false;
+		errors.password2="confirm password must match with password"
+		
 	}
 
 	return {
 		errors,
-		isValid
+		isValid:isEmpty(errors)
 	}
 
 
