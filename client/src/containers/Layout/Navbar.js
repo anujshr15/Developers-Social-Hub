@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import classes from './Navbar.css';
-import {NavLink} from 'react-router-dom';
+import {NavLink,Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../store/action/actions';
 import * as profileActions from '../../store/action/profileActions'
@@ -52,7 +52,8 @@ this.props.logoutUser();
     
 		return(
       <nav className={classes.nav}>
-        <span>Developer Hub</span>
+        <span><Link style={{textDecoration:'none'}} to="/dashboard">Developer Hub</Link></span>
+        <span><Link style={{textDecoration:'none'}} className="small ml-3 text-muted "to="/all">Developers</Link></span>
         {this.props.isAuthenticated?privateRoute:guestRoutes}
       </nav>
 

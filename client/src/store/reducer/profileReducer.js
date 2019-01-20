@@ -33,11 +33,44 @@ export default function(state=initialState,action)
 			loading:false
 		}
 
+		case actionTypes.GET_PROFILES:
+		return{
+			...state,
+			profiles:action.payload,
+			loading:false
+		} 
 		case actionTypes.CLEAR_CURRENT_PROFILE:
 		return {
 			...state,
 			profile:null
 		}
+
+		case actionTypes.START_GET_PROFILES:
+		return{
+			...state,
+			loading:true
+		}
+
+		case actionTypes.PROFILE_LOADING:
+		return {
+			...state,
+			loading:true
+		}
+
+		case actionTypes.GET_PROFILE:
+		return {
+			...state,
+			profile:action.payload,
+			loading:false
+		}
+
+		case actionTypes.PROFILE_NOT_FOUND:
+		return {
+			...state,
+			profile:action.payload,
+			loading:false
+		}
+
 
 		case actionTypes.CREATE_PROFILE_ERROR:
 		return {
@@ -45,6 +78,29 @@ export default function(state=initialState,action)
 			errors:action.payload
 		}
 
+		case actionTypes.ADD_EXPERIENCE_ERROR:
+		return {
+			...state,
+			errors:action.payload
+		}
+
+		case actionTypes.ADD_EDUCATION_ERROR:
+		return {
+			...state,
+			errors:action.payload
+		}
+
+		case actionTypes.DELETE_EXPERIENCE_ERROR:
+		return{
+			...state,
+			errors:action.payload
+		}
+
+		case actionTypes.DELETE_EDUCATION_ERROR:
+		return{
+			...state,
+			errors:action.payload
+		}
 
 
 		default:

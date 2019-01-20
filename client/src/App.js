@@ -16,7 +16,11 @@ import Dashboard from './containers/Dashboard/Dashboard'
 import * as profileActions from './store/action/profileActions'
 import PrivateRoute from './components/privateRoute/PrivateRoute';
 import CreateProfile from './components/createProfile/createProfile';
-import EditProfile from './containers/Dashboard/editProfile/editProfile';
+import EditProfile from './components/editProfile/editProfile';
+import AddExperience from './components/addExperience/addExperience';
+import AddEducation from './components/addEducation/addEducation';
+import Profiles from './components/profiles/profiles';
+import Profile from './components/profile/Profile';
 
 if(localStorage.jwtToken)
 {
@@ -49,7 +53,9 @@ class App extends Component {
         <div className="container">
          <Route path="/register" exact component={Register}/>
           <Route path="/login" exact component={Login}/>
-          <Switch>
+          <Route path="/all" exact component={Profiles}/>
+          <Route path="/profile/:handle" exact component={Profile}/>
+                    <Switch>
           <PrivateRoute path="/dashboard" exact component={Dashboard}/>
           </Switch>
            <Switch>
@@ -57,6 +63,12 @@ class App extends Component {
           </Switch>
           <Switch>
           <PrivateRoute path="/edit-profile" exact component={EditProfile}/>
+          </Switch>
+          <Switch>
+          <PrivateRoute path="/add-experience" exact component={AddExperience}/>
+          </Switch>
+          <Switch>
+          <PrivateRoute path="/add-education" exact component={AddEducation}/>
           </Switch>
         </div>
         <Footer/>

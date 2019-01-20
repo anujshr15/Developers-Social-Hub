@@ -4,6 +4,8 @@ import * as profileActions from '../../store/action/profileActions';
 import Spinner from '../Spinner/Spinner.js';
 import {Link} from "react-router-dom";
 import ProfileActions from './profileActions';
+import Experience from './Experience.js';
+import Education from './Education';
 
 class Dashboard extends Component{
 
@@ -34,6 +36,13 @@ render(){
         	<div>
         	<p className="lead text-muted">Welcome <Link to={`/api/profile/${profile.handle}`}>{user.name}</Link></p>
         	<ProfileActions/>
+          <div style={{marginTop:'50px'}}>
+          <Experience experience={profile.experience}/>
+          </div>
+           <div style={{marginTop:'50px'}}>
+         
+          <Education education={profile.education}/>
+          </div>
         	</div>
 
         	);
@@ -58,7 +67,10 @@ render(){
             <div className="col-md-12">
               <h1 className="display-4">Dashboard</h1>
               {dashboardContent}
-              <button onClick={(e)=>this.deleteHandler(e)} className="btn btn-danger">Delete Account</button>
+              
+        
+            
+              <button onClick={(e)=>this.deleteHandler(e)} className="btn btn-danger mt-4">Delete Account</button>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import classnames from 'classnames';
 import classes from './editProfile.css';
 import {withRouter} from 'react-router-dom';
-import * as profileActions from '../../../store/action/profileActions';
+import * as profileActions from '../../store/action/profileActions';
 
 
 const isEmpty=(val)=>{
@@ -43,16 +43,20 @@ addSocialButton=(event)=>{
 
 componentDidMount(){
 	this.props.getCurrentProfile();
+
 }
 
 inputHandler=(event)=>{
- 		const val=event.target.value;
- 		const oldState={...this.state};
- 		oldState[event.target.id]=val;
- 		this.setState(oldState);
+ 	this.setState({ [event.target.name]: event.target.value })
  	}
 
 componentWillReceiveProps(nextProps){
+
+if(nextProps.profile)
+	{
+		console.log(nextProps.profile)
+	}
+
 if(nextProps.errors)
 {
 	this.setState({errors:nextProps.errors})
@@ -60,7 +64,6 @@ if(nextProps.errors)
 
 if(nextProps.profile)
 {
-
 	const profile=nextProps.profile;
 
 	profile.company=isEmpty(profile.company)?"":profile.company;
@@ -72,13 +75,15 @@ if(nextProps.profile)
 	profile.location=isEmpty(profile.location)?"":profile.location;
 	profile.githubusername=isEmpty(profile.githubusername)?"":profile.githubusername;
 	profile.bio=isEmpty(profile.bio)?"":profile.bio;
-	profile.social=isEmpty(profile.social)?{}:profile.social;
-	if(!isEmpty(profile.social))
-	{profile.twitter=isEmpty(profile.twitter)?"":profile.twitter;
-		profile.facebook=isEmpty(profile.facebook)?"":profile.facebook;
-		profile.youtube=isEmpty(profile.youtube)?"":profile.youtube;
-		profile.instagram=isEmpty(profile.instagram)?"":profile.instagram;
-		profile.linkedin=isEmpty(profile.linkedin)?"":profile.linkedin;}
+
+	
+     profile.social = !isEmpty(profile.social) ? profile.social : {};
+	
+	 {profile.social.twitter=isEmpty(profile.social.twitter && profile.social)?"":profile.social.twitter;
+		profile.social.facebook=isEmpty(profile.social.facebook && profile.social)?"":profile.social.facebook;
+		profile.social.youtube=isEmpty(profile.social.youtube && profile.social)?"":profile.social.youtube;
+		profile.social.instagram=isEmpty(profile.social.instagram && profile.social)?"":profile.social.instagram;
+		profile.social.linkedin=isEmpty(profile.social.linkedin && profile.social)?"":profile.social.linkedin;}
 
 	this.setState({
 		handle:profile.handle,
@@ -87,11 +92,11 @@ if(nextProps.profile)
 		status:profile.status,
 		location:profile.location,
 		website:profile.website,
-		youtube:profile.youtube,
-		facebook:profile.facebook,
-		linkedin:profile.linkedin,
-		instagram:profile.instagram,
-		twitter:profile.twitter,
+		youtube:profile.social.youtube,
+				facebook:profile.social.facebook,
+				linkedin:profile.social.linkedin,
+				instagram:profile.social.instagram,
+				twitter:profile.social.twitter,
 		githubusername:profile.githubusername,
 		company:profile.company
 	})
@@ -130,7 +135,7 @@ this.props.createProfile(profileData,this.props.history);
 
 
 render(){
-
+	
 
 	const options=[
 {label:'Select Your Profession',value:0},
@@ -159,7 +164,7 @@ if(displaySocialInputs)
 		 <i className="fab fa-twitter"/>
 
 		 </span>
-		 <input type="text" value={this.state.twitter} onChange={(e)=>this.inputHandler(e)} id="twitter" placeholder="Twitter URL"/>
+		 <input type="text" value={this.state.twitter} onChange={(e)=>this.inputHandler(e)} name="twitter" placeholder="Twitter URL"/>
 		 {errors.twitter && <div className="invalid-feedback">{errors.twitter}</div>}
  		  </div>
 		 </div>
@@ -174,7 +179,7 @@ if(displaySocialInputs)
 		 <i className="fab fa-facebook-square"></i>
 		 </span>
 		 
-		<input type="text" value={this.state.facebook} onChange={(e)=>this.inputHandler(e)} id="facebook" className="input-field" placeholder="Facebook URL"/>
+		<input type="text" value={this.state.facebook} onChange={(e)=>this.inputHandler(e)} name="facebook" className="input-field" placeholder="Facebook URL"/>
 		{errors.facebook && <div className="invalid-feedback">{errors.facebook}</div>}
  		  </div>
 		</div>
@@ -186,7 +191,7 @@ if(displaySocialInputs)
 		<span className="input-group-text">
 		 <i className="fab fa-linkedin"></i>
 		 </span>
-		<input type="text" value={this.state.linkedin} onChange={(e)=>this.inputHandler(e)} id="linkedin" className="input-field" placeholder="linkedin URL"/>
+		<input type="text" value={this.state.linkedin} onChange={(e)=>this.inputHandler(e)} name="linkedin" className="input-field" placeholder="linkedin URL"/>
 		{errors.linkedin && <div className="invalid-feedback">{errors.linkedin}</div>}
  		  </div>
 		</div>
@@ -198,7 +203,7 @@ if(displaySocialInputs)
 		<span className="input-group-text">
 		 <i className="fab fa-youtube"></i>
 		 </span>
-		<input type="text" value={this.state.youtube} onChange={(e)=>this.inputHandler(e)} id="youtube" className="input-field" placeholder="Youtube URL"/>
+		<input type="text" value={this.state.youtube} onChange={(e)=>this.inputHandler(e)} name="youtube" className="input-field" placeholder="Youtube URL"/>
 		{errors.youtube && <div className="invalid-feedback">{errors.youtube}</div>}
  		  </div>
 		</div>
@@ -210,7 +215,7 @@ if(displaySocialInputs)
 		<span className="input-group-text">
 		 <i className="fab fa-instagram"></i>
 		 </span>
-		<input type="text" value={this.state.instagram} onChange={(e)=>this.inputHandler(e)} id="instagram" className="input-field" placeholder="Instagram URL"/>
+		<input type="text" value={this.state.instagram} onChange={(e)=>this.inputHandler(e)} name="instagram" className="input-field" placeholder="Instagram URL"/>
 		{errors.instagram && <div className="invalid-feedback">{errors.instagram}</div>}
  		  </div>
 		</div>
@@ -227,14 +232,14 @@ return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.f
  		 		<hr/>
  		 	 <div className="form-group">
  		    <label htmlFor="handle">Handle</label>
- 		    <input type="text" onChange={(event)=>this.inputHandler(event)} value={this.state.handle} className={classnames("form-control",{"is-invalid":errors.handle})} id="handle"  placeholder="Enter handle"/>
+ 		    <input type="text" onChange={(event)=>this.inputHandler(event)} value={this.state.handle} className={classnames("form-control",{"is-invalid":errors.handle})} name="handle"  placeholder="Enter handle"/>
  		  	<small className="d-block pb-3 text-muted">A unique handle for your profile</small>
  		  	{errors.handle && <div className="invalid-feedback">{errors.handle}</div>}
  		  
  		  </div>
  		  <div className="form-group">
  		    <label htmlFor="status">Status</label>
- 		    <select onChange={(event)=>this.inputHandler(event)} value={this.state.status } className={classnames("form-control",{"is-invalid":errors.status})} id="status">
+ 		    <select onChange={(event)=>this.inputHandler(event)} value={this.state.status } className={classnames("form-control",{"is-invalid":errors.status})} name="status">
  		    {options.map(opt=>{
  		    	
 
@@ -253,7 +258,7 @@ return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.f
 
  		  <div className="form-group">
  		    <label htmlFor="skills">Skills</label>
- 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.skills } type="text" className={classnames("form-control",{"is-invalid":errors.skills})} id="skills" placeholder="*Skills"/>
+ 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.skills } type="text" className={classnames("form-control",{"is-invalid":errors.skills})} name="skills" placeholder="*Skills"/>
  		  	<small className="d-block pb-3 text-muted">*Seperate skills using comma e.g HTML,CSS,JavaScript</small>
  		  	{errors.skills && <div className="invalid-feedback">{errors.skills}</div>}
  		  	
@@ -261,25 +266,25 @@ return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.f
 
  		  <div className="form-group">
  		    <label htmlFor="location">Location</label>
- 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.location } type="text" className={classnames("form-control",{"is-invalid":errors.location})} id="location" placeholder="Location"/>
+ 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.location ||""} type="text" className={classnames("form-control",{"is-invalid":errors.location})} name="location" placeholder="Location"/>
  		  	{errors.location && <div className="invalid-feedback">{errors.location}</div>}
  		  </div>
 
  		  <div className="form-group">
  		    <label htmlFor="bio">Bio</label>
- 		    <textarea onChange={(event)=>this.inputHandler(event)} value={this.state.bio }  className={classnames("form-control",{"is-invalid":errors.bio})} id="bio" placeholder="Write something about yourself in brief"></textarea>
+ 		    <textarea onChange={(event)=>this.inputHandler(event)} value={this.state.bio }  className={classnames("form-control",{"is-invalid":errors.bio})} name="bio" placeholder="Write something about yourself in brief"></textarea>
  		  	{errors.bio && <div className="invalid-feedback">{errors.bio}</div>}
  		  </div>
 
  		  <div className="form-group">
  		    <label htmlFor="githubusername">Github Username</label>
- 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.githubusername } type="text" className={classnames("form-control",{"is-invalid":errors.githubusername})} id="githubusername" placeholder="Your Github Username"/>
+ 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.githubusername||"" } type="text" className={classnames("form-control",{"is-invalid":errors.githubusername})} name="githubusername" placeholder="Your Github Username"/>
  		  	{errors.githubusername && <div className="invalid-feedback">{errors.githubusername}</div>}
  		  </div>
 
  		  <div className="form-group">
  		    <label htmlFor="website">Website</label>
- 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.website } type="text" className={classnames("form-control",{"is-invalid":errors.website})} id="website" placeholder="Your Website URL"/>
+ 		    <input onChange={(event)=>this.inputHandler(event)} value={this.state.website||"" } type="text" className={classnames("form-control",{"is-invalid":errors.website})} name="website" placeholder="Your Website URL"/>
  		  	{errors.website && <div className="invalid-feedback">{errors.website}</div>}
  		  </div>
 
@@ -289,7 +294,7 @@ return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.f
  		  </div>
  		  {socialInputs}
 
- 		  <button type="submit" className="btn btn-success">Submit</button>
+ 		  <button type="submit" className="btn btn-success">Edit Profile</button>
  		</form>
 	)
 
