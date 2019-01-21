@@ -67,8 +67,8 @@ export default function(state=initialState,action)
 		case actionTypes.PROFILE_NOT_FOUND:
 		return {
 			...state,
-			profile:action.payload,
-			loading:false
+			profile:null,
+			loading:true
 		}
 
 

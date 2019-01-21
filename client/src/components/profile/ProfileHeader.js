@@ -17,8 +17,7 @@ class ProfileHeader extends Component {
   render() {
 
     const { profile } = this.props;
-    console.log(profile.social.twitter)
-    console.log(profile.social.facebook)
+   
     // profile.social.facebook=isEmpty(profile.social.facebook)?"":profile.social.facebook
     // profile.social.youtube=isEmpty(profile.social.youtube)?"":profile.social.youtube
     // profile.social.instagram=isEmpty(profile.social.instagram)?"":profile.social.instagram
@@ -31,7 +30,7 @@ class ProfileHeader extends Component {
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
                 <img
-                  className="rounded-circle"
+                  className="rounded-circle img-fluid"
                   src={profile.user.avatar}
                   alt=""
                 />

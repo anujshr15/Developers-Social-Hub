@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import Spinner from '../../containers/Spinner/Spinner';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import ProfileAbout from './ProfileAbout';
 import ProfileHeader from './ProfileHeader';
 import ProfileGithub from './ProfileGithub';
@@ -11,56 +11,56 @@ import * as profileActions from '../../store/action/profileActions';
 class Profile extends Component {
 
 	componentDidMount(){
-		console.log(this.props)
+		
 			const handle=window.location.href.substr(window.location.href.lastIndexOf("/")+1,window.location.href.length);
 			this.props.getProfile(handle);
+	}
+
+	componentWillReceiveProps(nextProps){
+
+		if(nextProps.profile.profile===null && this.props.profile.loading)
+			{
+				console.log(this.props)
+			this.props.history.push('/not-found');
+
+		}
 	}
 
 
 render(){
 
-	const {profile,loading}=this.props.profile;
-	let profileContent;
-	if(profile===null||loading)
-	{
-		profileContent=<Spinner/>
-	}
+	const { profile, loading } = this.props.profile;
+    let profileContent;
 
-	else{
-		
-			profileContent=(
-				<div>
-				<div className="row">
-					<div className="col-md-6">
-					<Link to="/all" className="btn btn-light mt-3 mb-3 float-left">Back to Profiles</Link>
-					</div>
-					<div className="col-md-6"/>
-				</div>
-			<ProfileHeader profile={profile}/>
-			<ProfileAbout profile={profile}/>
-			<ProfileCreds profile={profile}/>
-			<ProfileGithub/>
-			</div>)
-		
-		
-	}
+    if (profile === null || loading) {
+      profileContent = <Spinner />;
+    } else {
+      profileContent = (
+        <div>
+          <div className="row">
+            <div className="col-md-6">
+              <Link to="/all" className="btn btn-light mb-3 float-left">
+                Back To Profiles
+              </Link>
+            </div>
+            <div className="col-md-6" />
+          </div>
+          <ProfileHeader profile={profile} />
+          <ProfileAbout profile={profile} />
+          <ProfileCreds   profile={profile}/>
+        </div>
+      );
+    }
 
-
-	return (
-
-		<div className="profile">
-				<div className="container">
-					<div className="row">
-					<div className="col-md-12">
-					{profileContent}
-					</div>
-					</div>
-
-				</div>
-		
-		</div>
-
-		)
+    return (
+      <div className="profile">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">{profileContent}</div>
+          </div>
+        </div>
+      </div>
+    );
 }
 
 
@@ -82,4 +82,4 @@ const mapDispatchToProps=dispatch=>{
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Profile);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Profile));

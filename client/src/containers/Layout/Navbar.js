@@ -23,6 +23,12 @@ this.props.logoutUser();
     {
       
       privateRoute=(<ul className={classes.ul}>
+        <li className={classes.li}>
+        
+          <NavLink to="/feed">
+            Posts
+          </NavLink>
+          </li>
           <li className={classes.li}>
           <NavLink to=""  onClick={(e)=>this.logoutHandler(e)}>
           <img src={this.props.user.avatar} alt={this.props.user.name} style={{width:'30px',marginRight:'5px',borderRadius:'20px'}} title="you must have your gravatar linked to your email "/>
@@ -34,7 +40,9 @@ this.props.logoutUser();
 
 
     const guestRoutes=(<ul className={classes.ul}>
+      
           <li className={classes.li}>
+
           <NavLink to="/login">
             Login
           </NavLink>
