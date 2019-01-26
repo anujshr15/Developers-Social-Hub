@@ -2,13 +2,13 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 import classes from './editProfile.css';
-import {withRouter} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 import * as profileActions from '../../store/action/profileActions';
 
 
 const isEmpty=(val)=>{
-	return (typeof val===undefined
-			|| typeof val===null
+	return (val===undefined
+			|| val===null
 			||(typeof val==="object" && Object.keys(val).length===0)
 			||(typeof val==="string" && val.trim().length===0))
 }
@@ -79,11 +79,11 @@ if(nextProps.profile)
 	
      profile.social = !isEmpty(profile.social) ? profile.social : {};
 	
-	 {profile.social.twitter=isEmpty(profile.social.twitter && profile.social)?"":profile.social.twitter;
+	 profile.social.twitter=isEmpty(profile.social.twitter && profile.social)?"":profile.social.twitter;
 		profile.social.facebook=isEmpty(profile.social.facebook && profile.social)?"":profile.social.facebook;
 		profile.social.youtube=isEmpty(profile.social.youtube && profile.social)?"":profile.social.youtube;
 		profile.social.instagram=isEmpty(profile.social.instagram && profile.social)?"":profile.social.instagram;
-		profile.social.linkedin=isEmpty(profile.social.linkedin && profile.social)?"":profile.social.linkedin;}
+		profile.social.linkedin=isEmpty(profile.social.linkedin && profile.social)?"":profile.social.linkedin;
 
 	this.setState({
 		handle:profile.handle,
@@ -227,7 +227,9 @@ if(displaySocialInputs)
 
 
 
-return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.form}>
+return (<div>
+	<Link to="/dashboard" style={{marginTop:'10px'}} className="btn btn-primary">Go Back</Link>
+	<form onSubmit={(event)=>this.submitHandler(event)} className={classes.form}>
  		 		<p className="lead text-center">EDIT PROFILE</p>
  		 		<hr/>
  		 	 <div className="form-group">
@@ -296,6 +298,7 @@ return (<form onSubmit={(event)=>this.submitHandler(event)} className={classes.f
 
  		  <button type="submit" className="btn btn-success">Edit Profile</button>
  		</form>
+ 		</div>
 	)
 
 

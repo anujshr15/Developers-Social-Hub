@@ -1,8 +1,8 @@
 import axios from '../../axios-instance.js';
 import * as actionTypes from './actionTypes';
 
-export const addPost=(postdata,history)=>dispatch=>{
-
+export const addPost=(postdata)=>dispatch=>{
+	dispatch(postsLoading())
 	axios.post("/api/posts",postdata)
 		.then(res=>{dispatch({
 			type:actionTypes.ADD_POST,
@@ -54,8 +54,8 @@ export const addComment=(postID,comment)=>dispatch=>{
 		 	payload:res.data
 		 }))
 		 .catch(err=>dispatch({
-		 	type:actionTypes.GET_POST,
-			payload:null
+		 	type:actionTypes.POST_ERROR,
+			payload:err.response.data
 		 }))
 }
 

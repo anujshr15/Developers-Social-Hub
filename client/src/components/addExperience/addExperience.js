@@ -5,14 +5,6 @@ import classnames from 'classnames';
 import classes from './addExperience.css';
 import * as profileActions from '../../store/action/profileActions';
 
-const isEmpty=(val)=>{
-	return (typeof val===undefined
-			|| typeof val===null
-			||(typeof val==="object" && Object.keys(val).length===0)
-			||(typeof val==="string" && val.trim().length===0))
-}
-
-
 
 class AddExperience extends Component {
 

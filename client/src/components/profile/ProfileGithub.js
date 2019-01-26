@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import {Link} from 'react-router-dom';
-import * as profileActions from '../../store/action/profileActions';
+// import {Link} from 'react-router-dom';
+// import * as profileActions from '../../store/action/profileActions';
 
 class ProfileGithub extends Component {
 

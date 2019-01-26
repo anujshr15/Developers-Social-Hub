@@ -34,7 +34,7 @@ render(){
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
         	<div>
-        	<p className="lead text-muted">Welcome <Link to={`/api/profile/${profile.handle}`}>{user.name}</Link></p>
+        	<p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
         	<ProfileActions/>
           <div style={{marginTop:'50px'}}>
           <Experience experience={profile.experience}/>

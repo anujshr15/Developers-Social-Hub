@@ -37,7 +37,7 @@ if(localStorage.jwtToken)
   {
     store.dispatch(actions.logoutUser())
     store.dispatch(profileActions.clearCurrentProfile())
-    window.location.href="/login";
+    window.location.href="/";
   }
 
 }
@@ -57,7 +57,7 @@ class App extends Component {
           <Route path="/login" exact component={Login}/>
           <Route path="/all" exact component={Profiles}/>
           <Route path="/profile/:handle" exact component={Profile}/>
-                    <Switch>
+          <Switch>
           <PrivateRoute path="/dashboard" exact component={Dashboard}/>
           </Switch>
            <Switch>

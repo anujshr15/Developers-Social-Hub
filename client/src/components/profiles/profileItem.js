@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 
 
 const isEmpty=(val)=>{
-	return (typeof val===undefined
-			|| typeof val===null
+	return ( val===undefined
+			||  val===null
 			||(typeof val==="object" && Object.keys(val).length===0)
 			||(typeof val==="string" && val.trim().length===0))
 }
@@ -20,7 +20,7 @@ class ProfileItem extends Component {
           <div className="col-2">
             <img src={profile.user.avatar} alt="" className="rounded-circle img-fluid" />
           </div>
-          <div className="col-lg-6 col-md-4 col-8">
+          <div className="col-md-4 col-lg-6 col-8 ">
             <h3>{profile.user.name}</h3>
             <p>
               {profile.status}{' '}

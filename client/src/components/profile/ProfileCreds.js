@@ -1,15 +1,8 @@
 import React,{Component} from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 
-const isEmpty=(val)=>{
-	return (
-			 val===null
-			||val===undefined
-			|| val===false
-			||(typeof val==="object" && Object.keys(val).length===0)
-			||(typeof val==="string" && val.trim().length===0))
-}
+
 
 class ProfileCreds extends Component {
   render() {

@@ -2,10 +2,16 @@ import React,{Component} from 'react';
 import classes from './Navbar.css';
 import {NavLink,Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import * as actions from '../../store/action/actions';
 import * as profileActions from '../../store/action/profileActions'
+import Backdrop from '../../components/Backdrop/Backdrop';
+
 class Navbar extends Component {
 
+state={
+display:false
+}
 
 
 logoutHandler=(e)=>{
@@ -13,6 +19,16 @@ e.preventDefault();
 this.props.clearCurrentProfile();
 this.props.logoutUser();
 
+}
+
+
+showHandler=()=>{
+const curDisplay=this.state.display;
+this.setState({display:!curDisplay})
+}
+
+clickHandler=()=>{
+  this.setState({display:false})
 }
 
 
@@ -55,16 +71,25 @@ this.props.logoutUser();
         </ul>);
 
    
-     
-
+  
     
 		return(
+      <div>
       <nav className={classes.nav}>
-        <span><Link style={{textDecoration:'none'}} to="/dashboard">Developer Hub</Link></span>
+        <span>{this.props.isAuthenticated?(<Link style={{textDecoration:'none'}} to="/dashboard">Developer Hub</Link>):<Link style={{textDecoration:'none'}} to="/">Developer Hub</Link>}</span>
         <span><Link style={{textDecoration:'none'}} className="small ml-3 text-muted "to="/all">Developers</Link></span>
+        <div onClick={this.showHandler} className="d-inline-block float-right mt-2" >
+          <div className={classes.ham}></div>
+          <div className={classes.ham}></div>
+          <div className={classes.ham}></div>
+        </div>
         {this.props.isAuthenticated?privateRoute:guestRoutes}
       </nav>
-
+      <div onClick={this.clickHandler}>
+       {this.state.display?<SideDrawer display={this.state.display}/>:null}
+       <Backdrop show={this.state.display}/>
+      </div>
+      </div>
 
 			);
 

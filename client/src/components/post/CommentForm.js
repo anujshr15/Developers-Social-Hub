@@ -35,7 +35,7 @@ class CommentForm extends Component {
     };
 
     this.props.addComment(postId, newComment);
-    this.setState({ text: '' });
+    this.setState({ text: '',errors:{} });
   }
 
   onChange(e) {
@@ -43,7 +43,7 @@ class CommentForm extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const errors = this.state.errors;
 
     return (
       <div className="post-form mb-3">
@@ -52,7 +52,7 @@ class CommentForm extends Component {
             Make a comment...
           </div>
           <div className="card-body">
-            <form onSubmit={this.onSubmit}>
+            <form >
               <div className="form-group">
               <textarea placeholder="Comment"
                 name="text"
@@ -60,9 +60,11 @@ class CommentForm extends Component {
                 onChange={this.onChange}
                 style={{width:'100%'}}
                 />
-               
+
+                {errors.text && <div className="d-block invalid-feedback">{errors.text}</div>}
               </div>
-              <button type="submit" className="btn btn-dark">
+
+              <button onClick={this.onSubmit} className="btn btn-dark">
                 Submit
               </button>
             </form>

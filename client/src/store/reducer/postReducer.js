@@ -14,13 +14,16 @@ export default function(state=initialState,action)
 		case actionTypes.ADD_POST:
 		return {
 			...state,
+			loading:false,
+			errors:{},
 			posts:[action.payload,...state.posts]
 		}
 
 		case actionTypes.POST_ERROR:
 		return {
 			...state,
-			errors:action.payload
+			errors:action.payload,
+			loading:false
 
 		}
 
@@ -28,11 +31,13 @@ export default function(state=initialState,action)
 		return {
 			...state,
 			post:action.payload,
-			loading:false
+			loading:false,
+			errors:{}
 		}
 		case actionTypes.DELETE_POST:
 		return{
 			...state,
+			errors:{},
 			posts:state.posts.filter(post=>action.payload!==post._id)
 		}
 
@@ -40,7 +45,8 @@ export default function(state=initialState,action)
 		return {
 			...state,
 			posts:action.payload,
-			loading:false
+			loading:false,
+			errors:{}
 		}
 
 		case actionTypes.POSTS_LOADING:

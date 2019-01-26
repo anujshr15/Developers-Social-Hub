@@ -16,7 +16,7 @@ componentDidMount(){
 render(){
 return (
 	<div className={classes.image}>
-	<div className={[classes.text,"container"].join(" ")}>
+	<div className={[classes.text,"container-fluid"].join(" ")}>
 	<p>Want To Join Developer Community?</p>
 	<button className="btn btn-success" onClick={()=>this.props.history.push("/register")}>JOIN</button>
 	</div>
