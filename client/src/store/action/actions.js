@@ -21,16 +21,18 @@ export const registerUserSuccess=(user)=>{
 export const registerUserFail=(error)=>{
 	return {
 		type:actionTypes.REGISTER_USER_FAIL,
-		payload:error.response
+		payload:error.response.data
 	}
 }
 
-export const registerUser=(userData)=>{
+export const registerUser=(userData,history)=>{
 	return dispatch=>{
 	dispatch(registerUserStart());
 	axios.post("/api/users/register",userData)
  			  .then(user=>
- 			  	dispatch(registerUserSuccess(user))
+ 			  	{dispatch(registerUserSuccess(user));
+ 			  	dispatch(loginUser({email:userData.email,password:userData.password1}));
+ 			  	history.push("/dashboard");}
  			  ).catch(err=>dispatch(registerUserFail(err)))
 	
 	}	

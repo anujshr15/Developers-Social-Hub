@@ -9,7 +9,7 @@ class Login extends Component{
 state={
 	email:"",
 	password:"",
-	errors:""
+	errors:{}
 }
 
 	componentDidMount(){
@@ -20,11 +20,12 @@ state={
 	}
 
 
- 	inputHandler=(event)=>{
- 		const val=event.target.value;
- 		const oldState={...this.state};
- 		oldState[event.target.id]=val;
- 		this.setState(oldState);
+ 	inputHandler=(e)=>{
+ 		// const val=event.target.value;
+ 		// const oldState={...this.state};
+ 		// oldState[event.target.id]=val;
+ 		// this.setState(oldState);
+ 		this.setState({[e.target.id]:e.target.value})
  	}
 
  	submitHandler=(event)=>{
@@ -33,24 +34,25 @@ state={
  			email:this.state.email,
  			password:this.state.password
  		}
+ 		this.setState({errors:{}})
  		this.props.loginUser(userDetails)
  	}
 
  	componentWillReceiveProps(nextProps){
- 		console.log("inside")
+ 		if(nextProps.errors)
+ 		{
+ 			this.setState({errors:nextProps.errors})
+ 		}
  		if(nextProps.isAuthenticated)
  		{
  			this.props.history.push("/dashboard")
  		}
 
- 		if(nextProps.errors)
- 		{
- 			this.setState({errors:nextProps.errors})
- 		}
+ 		
  	}
 
  	render(){
- 		const {errors}=this.state;
+ 		const errors=this.state.errors;
  		return (<form onSubmit={(event)=>this.submitHandler(event)}className={classes.form}>
  		 		<p className="lead text-center">SIGN IN TO YOUR ACCOUNT</p>
  		 	 <div className="form-group">
@@ -73,7 +75,7 @@ state={
 const mapStateToProps=state=>{
 	return {
 		isAuthenticated:state.auth.isAuthenticated,
-		errors:state.auth.error
+		errors:state.auth.errors
 	}
 }
 

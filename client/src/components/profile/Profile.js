@@ -4,7 +4,7 @@ import Spinner from '../../containers/Spinner/Spinner';
 import {Link,withRouter} from 'react-router-dom';
 import ProfileAbout from './ProfileAbout';
 import ProfileHeader from './ProfileHeader';
-import ProfileGithub from './ProfileGithub';
+//import ProfileGithub from './ProfileGithub';
 import ProfileCreds from './ProfileCreds';
 import * as profileActions from '../../store/action/profileActions';
 
@@ -39,7 +39,7 @@ render(){
         <div>
           <div className="row">
             <div className="col-md-6">
-              <Link to="/all" className="btn btn-light mb-3 float-left">
+              <Link to="/all" className="btn btn-light mb-3 mt-3 float-left">
                 Back To Profiles
               </Link>
             </div>

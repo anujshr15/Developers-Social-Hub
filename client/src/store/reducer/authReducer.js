@@ -13,7 +13,7 @@ const isEmpty=(val)=>{
 const initialState={
 isAuthenticated:false,
 user:{},
-errors:null
+errors:{}
 }
 
 export default function(state=initialState,action)
@@ -37,7 +37,7 @@ export default function(state=initialState,action)
 		{
 			return {
 				...state,
-				error:action.payload.data
+				errors:action.payload
 			}
 		}
 
@@ -58,7 +58,7 @@ export default function(state=initialState,action)
 		{
 			return {
 				...state,
-				error:action.payload
+				errors:action.payload
 			}
 		}
 

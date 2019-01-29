@@ -77,7 +77,7 @@ clickHandler=()=>{
       <div>
       <nav className={classes.nav}>
         <span>{this.props.isAuthenticated?(<Link style={{textDecoration:'none'}} to="/dashboard">Developer Hub</Link>):<Link style={{textDecoration:'none'}} to="/">Developer Hub</Link>}</span>
-        <span><Link style={{textDecoration:'none'}} className="small ml-3 text-muted "to="/all">Developers</Link></span>
+        <span><Link style={{textDecoration:'none'}} className={["small","ml-3","text-muted",classes.dev].join(' ')} to="/all">Developers</Link></span>
         <div onClick={this.showHandler} className="d-inline-block float-right mt-2" >
           <div className={classes.ham}></div>
           <div className={classes.ham}></div>

@@ -51,8 +51,11 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
         <Navbar/>
+        
+        
+       
         <Route path="/" exact component={Middle}/>
-        <div className="container">
+         <div className="container-fluid">
          <Route path="/register" exact component={Register}/>
           <Route path="/login" exact component={Login}/>
           <Route path="/all" exact component={Profiles}/>
@@ -79,9 +82,10 @@ class App extends Component {
           <PrivateRoute path="/post/:id" exact component={Post}/>
           </Switch>
           <Route path="/not-found" exact component={NotFound}/>
-          
+         
         </div>
-        <Footer/>
+         <Footer/>
+        
         </div>
       </BrowserRouter>
       </Provider>

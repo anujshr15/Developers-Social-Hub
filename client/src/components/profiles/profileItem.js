@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
+import './profileItem.css';
 
 
 const isEmpty=(val)=>{
@@ -17,10 +18,10 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div className="col-2">
+          <div className="col-2 ">
             <img src={profile.user.avatar} alt="" className="rounded-circle img-fluid" />
           </div>
-          <div className="col-md-4 col-lg-6 col-8 ">
+          <div className="col-md-4 col-8 col-lg-6" >
             <h3>{profile.user.name}</h3>
             <p>
               {profile.status}{' '}

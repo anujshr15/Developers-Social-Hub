@@ -11,7 +11,7 @@ import * as actions from '../../store/action/actions';
  		email:"",
  		password1:"",
  		password2:"",
- 		errors:""
+ 		errors:{}
  	}
 
  	componentWillReceiveProps(nextProps)
@@ -36,18 +36,18 @@ import * as actions from '../../store/action/actions';
  			password2:this.state.password2
  		}
 
- 		
- 		this.props.registerUser(newUser);
- 		(this.props.user)&& console.log(this.props.user);
+ 		this.setState({errors:{}})
+ 		this.props.registerUser(newUser,this.props.history);
  		}
 
-
  		componentDidMount(){
-		if(this.props.isAuthenticated)
+		if(this.props.auth.isAuthenticated)
 		{
 			this.props.history.push("/dashboard")
 		}
 	}
+
+
 
 
 
@@ -88,14 +88,14 @@ import * as actions from '../../store/action/actions';
 
 const mapDispatchToProps=dispatch=>{
 	return {
-		registerUser:(userData)=>dispatch(actions.registerUser(userData))
+		registerUser:(userData,history)=>dispatch(actions.registerUser(userData,history))
 	}
 }
 
 const mapStateToProps=state=>{
 	return {
-		user:state.auth.user,
-		errors:state.auth.error
+		auth:state.auth,
+		errors:state.auth.errors
 	}
 }
 

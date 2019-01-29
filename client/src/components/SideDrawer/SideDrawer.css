@@ -9,18 +9,22 @@
 	background-color: white;
 	padding:32px 16px;
 	box-sizing: box-shadow;
-	transition: transform 5.3s ease-in;
+	transition: transform .3s ease-out;
+	text-align: center;
 
 }
 
+.SideDrawer li {
+	list-style: none;
+}
 
 .Open{
-	transform: translateX(-100%);
+	transform: translateX(0);
 
 }
 
 .Close {
-	transform: translateX(0);
+	transform: translateX(-100%);
 	
 }
 

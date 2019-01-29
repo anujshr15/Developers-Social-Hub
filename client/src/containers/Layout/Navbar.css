@@ -45,6 +45,10 @@ display: none;
 		display: none;
 	}
 
+	.dev {
+		display: none;
+	}
+
 	.ham {
 		
 		margin-bottom:3px;
