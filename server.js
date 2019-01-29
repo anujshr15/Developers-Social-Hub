@@ -10,7 +10,7 @@ const posts=require('./routes/api/posts')
 const profile=require('./routes/api/profile')
 
 const app=express();
-const db=require('./config/keys.js');
+const db=require('./config/keys.js').mongoURI;
 mongoose.connect(db,{useNewUrlParser:true})
 		.then(()=>console.log("MONGODB connected"))
 		.catch(err=>console.log(err))
