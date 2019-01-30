@@ -11,7 +11,7 @@ const profile=require('./routes/api/profile')
 
 const app=express();
 const db=require('./config/keys.js').mongoURI;
-mongoose.connect(db,{useNewUrlParser:true})
+mongoose.connect(process.env.MONGODB_URI||db,{useNewUrlParser:true})
 		.then(()=>console.log("MONGODB connected"))
 		.catch(err=>console.log(err))
 
