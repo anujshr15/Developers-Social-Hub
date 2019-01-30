@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "social network for developers",
   "main": "server.js",
-  "scripts": {
- 
-    "start": "node server.js",
-    "heroku-postbuild":"cd client && npm install --only=dev && npm install && npm run build"
-  },
+ "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+      "heroku-postbuild":
+      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+},
   "author": "anuj shrivastav",
   "license": "ISC",
   "dependencies": {
